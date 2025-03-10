@@ -1,17 +1,18 @@
 import React from "react";
 import styles from "../ToastPlayground/ToastPlayground.module.css";
 
-function RadioGroupInput({ name, values, selectedValue, setSelectedValue }) {
+function RadioGroupInput({ label, values, selectedValue, setSelectedValue }) {
   return (
     <div className={styles.row}>
-      <div className={styles.label}>Variant</div>
+      <div className={styles.label}>{label}</div>
       <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
         {values.map((value, index) => (
           <RadioInput
-            name={name}
+            name={label.toLowerCase()}
             key={index}
             value={value}
             checked={value === selectedValue}
+            setSelectedValue={setSelectedValue}
           >
             {value}
           </RadioInput>
@@ -21,7 +22,7 @@ function RadioGroupInput({ name, values, selectedValue, setSelectedValue }) {
   );
 }
 
-function RadioInput({ setSelectedValue, ...delegated }) {
+function RadioInput({ setSelectedValue, children, ...delegated }) {
   const inputId = React.useId();
   return (
     <label htmlFor={inputId}>
@@ -33,9 +34,9 @@ function RadioInput({ setSelectedValue, ...delegated }) {
         }}
         {...delegated}
       />
-      {delegated.value}
+      {children}
     </label>
   );
 }
 
-export default RadioGroupInput;
+export default React.memo(RadioGroupInput);
