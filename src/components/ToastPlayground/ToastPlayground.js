@@ -5,13 +5,13 @@ import Button from "../Button";
 import RadioGroupInput from "../RadioGroupInput";
 
 import styles from "./ToastPlayground.module.css";
+import TextAreaInput from "../TextAreaInput";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
-  const [selectedVariant, setSelectedVariant] = React.useState(
-    VARIANT_OPTIONS[0]
-  );
+  const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
+  const [message, setMessage] = React.useState("");
 
   return (
     <div className={styles.wrapper}>
@@ -21,24 +21,17 @@ function ToastPlayground() {
       </header>
 
       <div className={styles.controlsWrapper}>
-        <div className={styles.row}>
-          <label
-            htmlFor="message"
-            className={styles.label}
-            style={{ alignSelf: "baseline" }}
-          >
-            Message
-          </label>
-          <div className={styles.inputWrapper}>
-            <textarea id="message" className={styles.messageInput} />
-          </div>
-        </div>
+        <TextAreaInput
+          label="Message"
+          content={message}
+          setContent={setMessage}
+        ></TextAreaInput>
 
         <RadioGroupInput
           label="Variant"
           values={VARIANT_OPTIONS}
-          selectedValue={selectedVariant}
-          setSelectedValue={setSelectedVariant}
+          selectedValue={variant}
+          setSelectedValue={setVariant}
         ></RadioGroupInput>
 
         <div className={styles.row}>
