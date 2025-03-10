@@ -14,7 +14,15 @@ function ToastPlayground() {
   const [message, setMessage] = React.useState("");
 
   return (
-    <div className={styles.wrapper}>
+    <form
+      className={styles.wrapper}
+      onSubmit={(e) => {
+        e.preventDefault();
+        window.alert(`${variant} - ${message}`);
+        setVariant(VARIANT_OPTIONS[0]);
+        setMessage("");
+      }}
+    >
       <header>
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
@@ -41,7 +49,7 @@ function ToastPlayground() {
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
 
