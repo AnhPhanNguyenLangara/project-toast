@@ -7,21 +7,14 @@ import RadioGroupInput from "../RadioGroupInput";
 import styles from "./ToastPlayground.module.css";
 import TextAreaInput from "../TextAreaInput";
 import ToastShelf from "../ToastShelf/ToastShelf";
+import { ToastContext } from "../ToastProvider/ToastProvider";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
   const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
   const [message, setMessage] = React.useState("");
-  const [toasts, setToasts] = React.useState([]);
-
-  // React.useEffect(() => {
-  //   console.log(toasts);
-  // }, [toasts]);
-
-  const handleDismiss = (id) => {
-    setToasts((toasts) => toasts.filter((toast) => toast.id !== id));
-  };
+  const { handleAddToast } = React.useContext(ToastContext);
 
   return (
     <div className={styles.wrapper}>
@@ -30,12 +23,12 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      <ToastShelf toasts={toasts} handleDismiss={handleDismiss}></ToastShelf>
+      <ToastShelf></ToastShelf>
 
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          setToasts([...toasts, { id: crypto.randomUUID(), message, variant }]);
+          handleAddToast(message, variant);
           setMessage("");
           setVariant(VARIANT_OPTIONS[0]);
         }}
