@@ -6,27 +6,34 @@ import RadioGroupInput from "../RadioGroupInput";
 
 import styles from "./ToastPlayground.module.css";
 import TextAreaInput from "../TextAreaInput";
+import Toast from "../Toast/Toast";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
   const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
   const [message, setMessage] = React.useState("");
+  const [showToast, setShowToast] = React.useState(false);
 
   return (
     <form
       className={styles.wrapper}
       onSubmit={(e) => {
         e.preventDefault();
-        window.alert(`${variant} - ${message}`);
-        setVariant(VARIANT_OPTIONS[0]);
-        setMessage("");
+        setShowToast(true);
       }}
     >
       <header>
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
+
+      <Toast
+        showing={showToast}
+        setShowing={setShowToast}
+        variant={variant}
+        content={message}
+      ></Toast>
 
       <div className={styles.controlsWrapper}>
         <TextAreaInput
