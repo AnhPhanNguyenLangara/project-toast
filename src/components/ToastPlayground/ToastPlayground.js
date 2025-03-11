@@ -24,15 +24,7 @@ function ToastPlayground() {
   };
 
   return (
-    <form
-      className={styles.wrapper}
-      onSubmit={(e) => {
-        e.preventDefault();
-        setToasts([...toasts, { id: crypto.randomUUID(), message, variant }]);
-        setMessage("");
-        setVariant(VARIANT_OPTIONS[0]);
-      }}
-    >
+    <div className={styles.wrapper}>
       <header>
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
@@ -42,7 +34,15 @@ function ToastPlayground() {
         {message}
       </ToastShelf>
 
-      <div className={styles.controlsWrapper}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          setToasts([...toasts, { id: crypto.randomUUID(), message, variant }]);
+          setMessage("");
+          setVariant(VARIANT_OPTIONS[0]);
+        }}
+        className={styles.controlsWrapper}
+      >
         <TextAreaInput
           label="Message"
           content={message}
@@ -62,8 +62,8 @@ function ToastPlayground() {
             <Button>Pop Toast!</Button>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }
 
