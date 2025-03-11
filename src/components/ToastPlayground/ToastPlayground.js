@@ -28,12 +28,9 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      <Toast
-        showing={showToast}
-        setShowing={setShowToast}
-        variant={variant}
-        content={message}
-      ></Toast>
+      <Toast showing={showToast} setShowing={setShowToast} variant={variant}>
+        {message}
+      </Toast>
 
       <div className={styles.controlsWrapper}>
         <TextAreaInput

@@ -18,7 +18,7 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast({ showing = false, setShowing, variant = "notice", content }) {
+function Toast({ showing = false, setShowing, variant = "notice", children }) {
   if (!(variant in ICONS_BY_VARIANT)) {
     throw new Error(
       `Variant ${variant} not supported. Please use one of the variants ${Object.keys(
@@ -33,7 +33,7 @@ function Toast({ showing = false, setShowing, variant = "notice", content }) {
         <div className={styles.iconContainer}>
           <Info size={24} />
         </div>
-        <p className={styles.content}>{content}</p>
+        <p className={styles.content}>{children}</p>
         <button
           className={styles.closeButton}
           onClick={() => setShowing(false)}
