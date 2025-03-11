@@ -15,9 +15,9 @@ function ToastPlayground() {
   const [message, setMessage] = React.useState("");
   const [toasts, setToasts] = React.useState([]);
 
-  React.useEffect(() => {
-    console.log(toasts);
-  }, [toasts]);
+  // React.useEffect(() => {
+  //   console.log(toasts);
+  // }, [toasts]);
 
   const handleDismiss = (id) => {
     setToasts((toasts) => toasts.filter((toast) => toast.id !== id));
