@@ -4,9 +4,12 @@ import Toast from "../Toast";
 import styles from "./ToastShelf.module.css";
 import { ToastContext } from "../ToastProvider/ToastProvider";
 
-function ToastShelf() {
-  const { toasts, handleDismissToast } = React.useContext(ToastContext);
+import useEscapeKey from "../../hooks/useEscape";
 
+function ToastShelf() {
+  const { toasts, handleDismissToast, handleDismissAll } =
+    React.useContext(ToastContext);
+  useEscapeKey(handleDismissAll);
   return (
     <ol className={styles.wrapper}>
       {toasts.map(({ id, message, variant }) => (
