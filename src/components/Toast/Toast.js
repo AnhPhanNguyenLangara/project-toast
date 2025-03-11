@@ -18,7 +18,7 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast({ showing = false, setShowing, variant = "notice", children }) {
+function Toast({ locator, handleDismiss, variant = "notice", children }) {
   if (!(variant in ICONS_BY_VARIANT)) {
     throw new Error(
       `Variant ${variant} not supported. Please use one of the variants ${Object.keys(
@@ -27,22 +27,24 @@ function Toast({ showing = false, setShowing, variant = "notice", children }) {
     );
   }
 
+  const Icon = ICONS_BY_VARIANT[variant];
+
   return (
-    showing && (
-      <div className={`${styles.toast} ${styles[variant]}`}>
-        <div className={styles.iconContainer}>
-          <Info size={24} />
-        </div>
-        <p className={styles.content}>{children}</p>
-        <button
-          className={styles.closeButton}
-          onClick={() => setShowing(false)}
-        >
-          <X size={24} />
-          <VisuallyHidden>Dismiss message</VisuallyHidden>
-        </button>
+    <div className={`${styles.toast} ${styles[variant]}`}>
+      <div className={styles.iconContainer}>
+        <Icon size={24} />
       </div>
-    )
+      <p className={styles.content}>{children}</p>
+      <button
+        className={styles.closeButton}
+        onClick={() => {
+          handleDismiss(locator);
+        }}
+      >
+        <X size={24} />
+        <VisuallyHidden>Dismiss message</VisuallyHidden>
+      </button>
+    </div>
   );
 }
 
