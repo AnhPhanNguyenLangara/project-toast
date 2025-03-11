@@ -18,7 +18,7 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast({ locator, handleDismiss, variant = "notice", children }) {
+function Toast({ handleDismiss, variant = "notice", children }) {
   if (!(variant in ICONS_BY_VARIANT)) {
     throw new Error(
       `Variant ${variant} not supported. Please use one of the variants ${Object.keys(

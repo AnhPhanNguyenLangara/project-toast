@@ -30,9 +30,7 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      <ToastShelf toasts={toasts} handleDismiss={handleDismiss}>
-        {message}
-      </ToastShelf>
+      <ToastShelf toasts={toasts} handleDismiss={handleDismiss}></ToastShelf>
 
       <form
         onSubmit={(e) => {
