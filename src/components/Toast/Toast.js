@@ -35,12 +35,7 @@ function Toast({ locator, handleDismiss, variant = "notice", children }) {
         <Icon size={24} />
       </div>
       <p className={styles.content}>{children}</p>
-      <button
-        className={styles.closeButton}
-        onClick={() => {
-          handleDismiss(locator);
-        }}
-      >
+      <button className={styles.closeButton} onClick={handleDismiss}>
         <X size={24} />
         <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>
