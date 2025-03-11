@@ -6,21 +6,31 @@ import RadioGroupInput from "../RadioGroupInput";
 
 import styles from "./ToastPlayground.module.css";
 import TextAreaInput from "../TextAreaInput";
-import Toast from "../Toast/Toast";
+import ToastShelf from "../ToastShelf/ToastShelf";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
   const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
   const [message, setMessage] = React.useState("");
-  const [showToast, setShowToast] = React.useState(false);
+  const [toasts, setToasts] = React.useState([]);
+
+  React.useEffect(() => {
+    console.log(toasts);
+  }, [toasts]);
+
+  const handleDismiss = (id) => {
+    setToasts((toasts) => toasts.filter((toast) => toast.id !== id));
+  };
 
   return (
     <form
       className={styles.wrapper}
       onSubmit={(e) => {
         e.preventDefault();
-        setShowToast(true);
+        setToasts([...toasts, { id: crypto.randomUUID(), message, variant }]);
+        setMessage("");
+        setVariant(VARIANT_OPTIONS[0]);
       }}
     >
       <header>
@@ -28,9 +38,9 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      <Toast showing={showToast} setShowing={setShowToast} variant={variant}>
+      <ToastShelf toasts={toasts} handleDismiss={handleDismiss}>
         {message}
-      </Toast>
+      </ToastShelf>
 
       <div className={styles.controlsWrapper}>
         <TextAreaInput
